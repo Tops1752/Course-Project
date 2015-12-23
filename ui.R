@@ -14,16 +14,21 @@ shinyUI(pageWithSidebar(
         
         h3("Step 1 - Choose Distribution"),
         radioButtons("dist", "Distribution Type:",
-                           c("Uniform" = "unif",
-                             "Normal" = "norm",
+                           c("Normal" = "norm",
+                             "Poisson" = "pois",
                              "Exponential" = "exp")
                      ),
         sliderInput("mn", "Input distribution mean:",value = 5, min = 1, max = 10, step = 1,),
-        sliderInput("sd", "Input distribution sd:",value = 2, min = 1, max = 10, step = 2,),
+        sliderInput("sd", "Input distribution sd:",value = 1, min = 1, max = 10, step = 2,),
         
         h3("Step 2 - Set Simulation Parameter"),
+        p("Choose the sample size and how many times you want to run the simulation."),
         numericInput('n', 'Sample Size',value = 40, min = 30, max = 80, step = 10,),
         numericInput('round', 'Times conducting simulation',value = 1000, min = 500, max = 2000, step = 500,),
+        
+        h3("Setp 3 - Run Simulation"),
+        p("Now let's run the simulation to see how does the mean of each sample look like."),
+        actionButton('run','Run Simulation!'),
         
         
         
@@ -33,7 +38,10 @@ shinyUI(pageWithSidebar(
     
     sidebarPanel(
       
-      plotOutput('distPlot')
+      plotOutput('distPlot'),
+      
+      p("Results of simulation:"),
+      plotOutput('meanPlot')
       
     )
     
