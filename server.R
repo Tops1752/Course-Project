@@ -4,6 +4,8 @@ shinyServer(
         ## show an example of how the sample data look like
         output$distPlot <- renderPlot({
             
+            library(ggplot2)
+            
             distSample <- NULL
             if(input$tabset == "Poisson"){
                 mu <- input$mnP
